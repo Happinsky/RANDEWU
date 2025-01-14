@@ -14,7 +14,7 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f8ff;
-            background-image: url('zdjecie.png'); /* Użyj nazwy pliku w repozytorium */
+            background-image: url('zdjecie.png'); /* Replace with your uploaded file name */
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -32,6 +32,7 @@
             justify-content: center;
             gap: 50px;
             margin-top: 20px;
+            position: relative;
         }
 
         .btn {
@@ -63,6 +64,8 @@
         }
     </style>
     <script>
+        let escapeCount = 0;
+
         function showLoveMessage() {
             alert('Hej, kocham Cię!');
         }
@@ -70,28 +73,38 @@
         function moveNoButton(event) {
             const button = event.target;
 
-            const container = document.querySelector('.button-container');
-            const containerWidth = container.offsetWidth;
-            const containerHeight = container.offsetHeight;
+            if (escapeCount === 0) {
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
 
-            const buttonWidth = button.offsetWidth;
-            const buttonHeight = button.offsetHeight;
+                const buttonWidth = button.offsetWidth;
+                const buttonHeight = button.offsetHeight;
 
-            const randomX = Math.random() * (containerWidth - buttonWidth);
-            const randomY = Math.random() * (containerHeight - buttonHeight);
+                const randomX = Math.random() * (viewportWidth - buttonWidth);
+                const randomY = Math.random() * (viewportHeight - buttonHeight);
 
-            button.style.position = 'absolute';
-            button.style.left = `${randomX}px`;
-            button.style.top = `${randomY}px`;
+                button.style.position = 'absolute';
+                button.style.left = `${randomX}px`;
+                button.style.top = `${randomY}px`;
+                escapeCount++;
+            } else {
+                button.style.display = 'none';
+            }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const noButton = document.querySelector('.btn-no');
+            noButton.addEventListener('mouseover', moveNoButton);
+        });
     </script>
 </head>
 <body>
     <h1>Czy pójdziesz ze mną na randkę, Sandra?</h1>
     <div class="button-container">
         <button class="btn btn-yes" onclick="showLoveMessage()">Tak</button>
-        <button class="btn btn-no" onmouseover="moveNoButton(event)">Nie</button>
+        <button class="btn btn-no">Nie</button>
     </div>
 </body>
 </html>
+
 
