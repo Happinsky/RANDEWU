@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pytanie do Sandry</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -18,24 +12,12 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            width: 100vw;
-            overflow: hidden;
+            margin: 0;
             background-color: #f0f8ff;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background-image: url('zdjecie.png'); 
+            background-image: url('zdjecie.png'); /* Replace with your uploaded file name */
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            width: 100%;
-            max-width: 1000px; 
-            aspect-ratio: 16 / 9; 
         }
 
         h1 {
@@ -43,18 +25,14 @@
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             border-radius: 10px;
-            position: absolute;
-            top: 10%;
-            text-align: center;
         }
 
         .button-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 50px;
             margin-top: 20px;
-            position: absolute;
-            bottom: 10%;
+            position: relative;
         }
 
         .btn {
@@ -96,15 +74,14 @@
             const button = event.target;
 
             if (escapeCount === 0) {
-                const container = document.querySelector('.container');
-                const containerWidth = container.offsetWidth;
-                const containerHeight = container.offsetHeight;
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
 
                 const buttonWidth = button.offsetWidth;
                 const buttonHeight = button.offsetHeight;
 
-                const randomX = Math.random() * (containerWidth - buttonWidth);
-                const randomY = Math.random() * (containerHeight - buttonHeight);
+                const randomX = Math.random() * (viewportWidth - buttonWidth);
+                const randomY = Math.random() * (viewportHeight - buttonHeight);
 
                 button.style.position = 'absolute';
                 button.style.left = `${randomX}px`;
@@ -122,15 +99,10 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Czy pójdziesz ze mną na randkę, Sandra?</h1>
-        <div class="button-container">
-            <button class="btn btn-yes" onclick="showLoveMessage()">Tak</button>
-            <button class="btn btn-no">Nie</button>
-        </div>
+    <h1>Czy pójdziesz ze mną na randkę, Sandra?</h1>
+    <div class="button-container">
+        <button class="btn btn-yes" onclick="showLoveMessage()">Tak</button>
+        <button class="btn btn-no">Nie</button>
     </div>
 </body>
 </html>
-
-
-
